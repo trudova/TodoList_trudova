@@ -11,6 +11,7 @@ import TodoList from './components/TodoList';
     item:'',
     editItem:false
    }
+
    handleChange=(e)=>{
      this.setState({
        item:e.target.value
@@ -33,25 +34,34 @@ import TodoList from './components/TodoList';
    }
 
    clearList =()=>{
-    console.log('hello clearList')
+    this.setState({
+      items:[]
+    })
    }
    handleDelete =(id)=>{
-    console.log(`hello delete ${id}`)
+   const filteredItems =this.state.items.filter(item=>item.id !==id);
+   this.setState({
+    items:filteredItems
+  })
    }
 
    handleEdit =(id)=>{
-    console.log(`hello edit ${id}`)
+    
    }
 
   render() {
-    console.log(this.state)
+   
     return (
       <div className="container">
       <div className='row'>
         <div className='col-10 mx-auto col-md-8 mt-5'>
           <h2 className='text-capitalize text-centr'>ToDo input</h2>
           <TodoInput item ={this.state.item} handleChange={this.handleChange} handleSubmit={this.handleSubmit} editItem={this.state.editItem}/>
-        <TodoList items={this.state.items} clearList={this.clearList} handleDelete={this.handleDelete} handleEdit={this.handleEdit}  />
+        <TodoList 
+        items={this.state.items} 
+        clearList={this.clearList} 
+        handleDelete={this.handleDelete} 
+        handleEdit={this.handleEdit}  />
         </div>
       </div>
     </div>
